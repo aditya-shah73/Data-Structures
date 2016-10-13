@@ -1,4 +1,6 @@
+package Interview_Programs;
 import java.util.*;
+
 public class DuplicateParenthesis 
 {
 	public static boolean checkParenthesis(String s) 
