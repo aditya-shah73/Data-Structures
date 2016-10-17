@@ -2,3 +2,5 @@
 src/.DS_Store
 .project
 .classpath
+.DS_Store
+.gitignore
