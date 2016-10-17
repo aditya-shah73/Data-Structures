@@ -1,3 +1,5 @@
+package Interview_Programs;
+
 import java.util.Scanner;
 
 public class PrintTriangle 
