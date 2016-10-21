@@ -1,5 +1,6 @@
 package Interview_Programs;
 import java.util.*;
+
 public class checkStringPermutation 
 {
 	public static boolean checkPermutation(String s1, String s2)
