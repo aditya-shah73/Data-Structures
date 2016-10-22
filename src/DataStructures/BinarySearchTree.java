@@ -3,7 +3,7 @@ package DataStructures;
 public class BinarySearchTree 
 {
 	public static BSTNode root;
-	
+
 	public BinarySearchTree()
 	{
 		this.root = null;
@@ -63,7 +63,119 @@ public class BinarySearchTree
 			}
 		}
 	}
-	
+
+	public boolean delete(int data)
+	{
+		BSTNode parent = root;
+		BSTNode current = root;
+		boolean isLeftChild = false;
+		while(current.data != data)
+		{
+			parent = current;
+			if(current.data > data)
+			{
+				isLeftChild = true;
+				current = current.left;
+			}
+			else
+			{
+				isLeftChild = false;
+				current = current.right;
+			}
+			if(current ==null)
+			{
+				return false;
+			}
+		}
+
+		if(current.left==null && current.right==null)
+		{
+			if(current==root)
+			{
+				root = null;
+			}
+			if(isLeftChild ==true)
+			{
+				parent.left = null;
+			}
+			else
+			{
+				parent.right = null;
+			}
+		}
+
+		else if(current.right==null)
+		{
+			if(current==root)
+			{
+				root = current.left;
+			}
+			else if(isLeftChild)
+			{
+				parent.left = current.left;
+			}
+			else
+			{
+				parent.right = current.left;
+			}
+		}
+		
+		else if(current.left==null)
+		{
+			if(current==root)
+			{
+				root = current.right;
+			}
+			else if(isLeftChild)
+			{
+				parent.left = current.right;
+			}
+			else
+			{
+				parent.right = current.right;
+			}
+		}
+		
+		else if(current.left!=null && current.right!=null)
+		{
+			BSTNode successor = getSuccessor(current);
+			if(current==root)
+			{
+				root = successor;
+			}
+			else if(isLeftChild)
+			{
+				parent.left = successor;
+			}
+			else
+			{
+				parent.right = successor;
+			}			
+			successor.left = current.left;
+		}		
+		return true;		
+	}
+
+	public BSTNode getSuccessor(BSTNode data)
+	{
+		BSTNode successsor =null;
+		BSTNode successsorParent =null;
+		BSTNode current = data.right;
+		while(current != null)
+		{
+			successsorParent = successsor;
+			successsor = current;
+			current = current.left;
+		}
+		
+		if(successsor != data.right)
+		{
+			successsorParent.left = successsor.right;
+			successsor.right = data.right;
+		}
+		return successsor;
+	}
+
 	public void display(BSTNode root)
 	{
 		if(root!=null)
@@ -73,7 +185,7 @@ public class BinarySearchTree
 			display(root.right);
 		}
 	}
-	
+
 	public static void main(String arg[])
 	{
 		BinarySearchTree b = new BinarySearchTree();
@@ -84,5 +196,11 @@ public class BinarySearchTree
 		b.display(b.root);		
 		System.out.println("");
 		System.out.println("Check whether Node with value 4 exists : " + b.find(4));
+		System.out.println("Delete Node with no children (2) : " + b.delete(2));		
+		b.display(root);
+		System.out.println("\n Delete Node with one child (4) : " + b.delete(4));		
+		b.display(root);
+		System.out.println("\n Delete Node with Two children (10) : " + b.delete(10));		
+		b.display(root);
 	}
 }
