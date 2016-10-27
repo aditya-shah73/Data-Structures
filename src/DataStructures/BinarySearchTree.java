@@ -86,8 +86,9 @@ public class BinarySearchTree
 			{
 				return false;
 			}
-		}
+		}//Find the node to be deleted and stored in current
 
+		//Case 1 when the node to be deleted has no children (Leaf Node)
 		if(current.left==null && current.right==null)
 		{
 			if(current==root)
@@ -104,6 +105,7 @@ public class BinarySearchTree
 			}
 		}
 
+		//Case 2 when the node to be deleted has only one child
 		else if(current.right==null)
 		{
 			if(current==root)
@@ -136,6 +138,7 @@ public class BinarySearchTree
 			}
 		}
 		
+		//Case 3 when the node to be deleted has two children
 		else if(current.left!=null && current.right!=null)
 		{
 			BSTNode successor = getSuccessor(current);
@@ -158,8 +161,8 @@ public class BinarySearchTree
 
 	public BSTNode getSuccessor(BSTNode data)
 	{
-		BSTNode successsor =null;
-		BSTNode successsorParent =null;
+		BSTNode successsor =data;
+		BSTNode successsorParent =data;
 		BSTNode current = data.right;
 		while(current != null)
 		{
